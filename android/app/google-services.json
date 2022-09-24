@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "804683898520",
+    "project_id": "fiume-dev-alpha-1",
+    "storage_bucket": "fiume-dev-alpha-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804683898520:android:19be60c3e48e627636faed",
+        "android_client_info": {
+          "package_name": "app.fiume.flutter.fiume"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804683898520-7hnhunr4enjea4ng7gigequod0av0d85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVu-Ro1qDd3Xoa4eaYL_joGM_GKGV8MVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804683898520-7hnhunr4enjea4ng7gigequod0av0d85.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
