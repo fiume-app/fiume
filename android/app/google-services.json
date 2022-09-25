@@ -29,6 +29,13 @@
             {
               "client_id": "804683898520-7hnhunr4enjea4ng7gigequod0av0d85.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "804683898520-3r3nqu30e3gee5suk1ov97lu6ijtbddj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.fiume.flutter.fiume"
+              }
             }
           ]
         }
