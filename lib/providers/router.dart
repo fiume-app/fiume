@@ -1,6 +1,7 @@
 import 'package:fiume/providers/user.dart';
 import 'package:fiume/screens/home.dart';
 import 'package:fiume/screens/login.dart';
+import 'package:fiume/screens/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,25 +30,39 @@ class AsyncRouterNotifier extends ChangeNotifier {
     final user = _ref.read(userProvider);
 
     if (user == null) {
-      if (state.location == '/login') return null;
+      if (state.location.startsWith('/login')) return null;
       return '/login';
     }
 
-    if (state.location == '/login') return '/';
+    if (state.location.startsWith('/login')) return '/';
 
     return null;
   }
 
-  List<GoRoute> get _routes => [
-    GoRoute(
-      name: "home",
-      path: '/',
-      builder: (context, _) => const Home(),
-    ),
-    GoRoute(
-      name: "login",
-      path: '/login',
-      builder: (context, _) => const Login(),
+  List<ShellRoute> get _routes => [
+    ShellRoute(
+      builder: (context, state, child) {
+        return child;
+      },
+      routes: [
+        GoRoute(
+          name: "home",
+          path: '/',
+          builder: (context, _) => const Home(),
+        ),
+        GoRoute(
+          name: "login",
+          path: '/login',
+          builder: (context, _) => const Login(),
+          routes: [
+            GoRoute(
+              name: "signup",
+              path: 'signup',
+              builder: (context, _) => const Signup(),
+            ),
+          ],
+        ),
+      ],
     ),
   ];
 }
