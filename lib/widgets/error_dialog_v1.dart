@@ -1,0 +1,23 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+class ErrorDialogV1 extends StatelessWidget {
+  const ErrorDialogV1({Key? key, required this.errorString}) : super(key: key);
+
+  final String errorString;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(errorString),
+      actions: [
+        ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('Close'),
+        ),
+      ],
+    );
+  }
+}
