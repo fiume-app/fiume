@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 1080 1080" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<linearGradient gradientTransform="matrix(1 0 0 1 0 0)" gradientUnits="userSpaceOnUse" id="LinearGradient" x1="1007.15" x2="385.79" y1="39.05" y2="1115.28">
+<stop offset="0" stop-color="#15baff"/>
+<stop offset="0.14" stop-color="#1bb4ff" stop-opacity="0.99"/>
+<stop offset="0.32" stop-color="#2fa6ff" stop-opacity="0.95"/>
+<stop offset="0.54" stop-color="#4f8fff" stop-opacity="0.89"/>
+<stop offset="0.77" stop-color="#7d6eff" stop-opacity="0.8"/>
+<stop offset="1" stop-color="#b347ff" stop-opacity="0.7"/>
+</linearGradient>
+<linearGradient gradientTransform="matrix(1 0 0 1 0 0)" gradientUnits="userSpaceOnUse" id="LinearGradient_2" x1="509.27" x2="-4.43" y1="973.43" y2="83.66">
+<stop offset="0" stop-color="#3ddeed"/>
+<stop offset="0.19" stop-color="#52dcdf" stop-opacity="0.87"/>
+<stop offset="0.6" stop-color="#88d7bf" stop-opacity="0.54"/>
+<stop offset="1" stop-color="#c0d29d" stop-opacity="0.2"/>
+</linearGradient>
+</defs>
+<clipPath id="ArtboardFrame">
+<rect height="1080" width="1080" x="0" y="0"/>
+</clipPath>
+<g clip-path="url(#ArtboardFrame)" id="Untitled">
+<path d="M199.47 0L880.53 0C990.694 2.15891e-05 1080 89.3058 1080 199.47L1080 880.53C1080 990.694 990.694 1080 880.53 1080L199.47 1080C89.3058 1080 2.26215e-05 990.694 5.98718e-06 880.53L5.98718e-06 199.47C-1.96053e-05 89.3058 89.3058-3.12745e-06 199.47 0Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none"/>
+<g opacity="1">
+<path d="M888.02 0L436.96 0C295.08 400.43 801.67 438.03 714.16 621.63C624.69 809.35 324.69 1080 324.69 1080L888.02 1080C994.05 1080 1080 994.05 1080 888.02L1080 191.98C1080 85.95 994.05 0 888.02 0Z" fill="url(#LinearGradient)" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M714.16 621.63C801.67 438.03 295.08 400.43 436.96 0L191.98 0C85.95 0 0 85.95 0 191.98L0 888.02C0 994.05 85.95 1080 191.98 1080L324.68 1080C324.68 1080 624.68 809.35 714.15 621.63L714.16 621.63Z" fill="url(#LinearGradient_2)" fill-rule="nonzero" opacity="1" stroke="none"/>
+</g>
+</g>
+</svg>
