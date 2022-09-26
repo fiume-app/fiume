@@ -14,14 +14,19 @@ class OpRet {
 }
 
 class UserState extends StateNotifier<User?> {
-  UserState() : super(null);
+  UserState() : super(FirebaseAuth.instance.currentUser);
 
-  Future<OpRet> signup(String email, String password) async {
+  Future<OpRet> signup(String email, String password, String name) async {
     try {
       final credential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
+          .createUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
 
       state = credential.user;
+
+      await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
 
       return OpRet(
         credential: credential,
@@ -61,7 +66,7 @@ class UserState extends StateNotifier<User?> {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         return OpRet(
-          errorString: 'No User Found for that Email',
+          errorString: 'No User Found for this Email',
           error: e,
         );
       } else if (e.code == 'wrong-password') {
@@ -82,6 +87,27 @@ class UserState extends StateNotifier<User?> {
 
   Future<void> signout() async {
     await FirebaseAuth.instance.signOut();
+    state = null;
+  }
+
+  Future<OpRet> forgotPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'auth/user-not-found') {
+        return OpRet(
+          errorString: 'No User Found for this Email',
+          error: e,
+        );
+      }
+    } catch (e) {
+      return OpRet(
+        errorString: 'An Unknown Error Occured',
+        error: e,
+      );
+    }
+
+    return OpRet();
   }
 }
 
