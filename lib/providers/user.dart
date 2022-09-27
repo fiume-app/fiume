@@ -1,20 +1,36 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiume/api/buyers.dart';
+import 'package:fiume/models/buyer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class OpRet {
   final UserCredential? credential;
+  final Buyer? apiUser;
   final String? errorString;
   final dynamic error;
 
   OpRet({
     this.credential,
+    this.apiUser,
     this.errorString,
     this.error,
   });
 }
 
-class UserState extends StateNotifier<User?> {
-  UserState() : super(FirebaseAuth.instance.currentUser);
+class ModUser {
+  User? user;
+  Buyer? apiUser;
+
+  ModUser({
+    this.user,
+    this.apiUser
+  });
+}
+
+class UserState extends StateNotifier<ModUser?> {
+  UserState() : super(ModUser(
+    user: FirebaseAuth.instance.currentUser,
+  ));
 
   Future<OpRet> signup(String email, String password, String name) async {
     try {
@@ -24,12 +40,27 @@ class UserState extends StateNotifier<User?> {
             password: password,
           );
 
-      state = credential.user;
-
       await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
+
+      var ret = await getOrPostBuyers();
+
+      if (ret.error != null) {
+        FirebaseAuth.instance.signOut();
+
+        return OpRet(
+          errorString: 'Unable to complete operation',
+          error: ret.error,
+        );
+      }
+
+      state = ModUser(
+        user: FirebaseAuth.instance.currentUser,
+        apiUser: ret.response
+      );
 
       return OpRet(
         credential: credential,
+        apiUser: ret.response,
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -58,10 +89,25 @@ class UserState extends StateNotifier<User?> {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      state = credential.user;
+      var ret = await getOrPostBuyers();
+
+      if (ret.error != null) {
+        FirebaseAuth.instance.signOut();
+
+        return OpRet(
+          errorString: 'Unable to complete operation',
+          error: ret.error,
+        );
+      }
+
+      state = ModUser(
+          user: FirebaseAuth.instance.currentUser,
+          apiUser: ret.response
+      );
 
       return OpRet(
         credential: credential,
+        apiUser: ret.response,
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -87,7 +133,10 @@ class UserState extends StateNotifier<User?> {
 
   Future<void> signout() async {
     await FirebaseAuth.instance.signOut();
-    state = null;
+    state = ModUser(
+        user: null,
+        apiUser: null
+    );
   }
 
   Future<OpRet> forgotPassword(String email) async {
@@ -109,8 +158,21 @@ class UserState extends StateNotifier<User?> {
 
     return OpRet();
   }
+
+  Future<void> getApiUser() async {
+    var ret = await getOrPostBuyers();
+
+    if (ret.error != null) {
+      FirebaseAuth.instance.signOut();
+    }
+
+    state = ModUser(
+        user: FirebaseAuth.instance.currentUser,
+        apiUser: ret.response
+    );
+  }
 }
 
-final userProvider = StateNotifierProvider<UserState, User?>((ref) {
+final userProvider = StateNotifierProvider<UserState, ModUser?>((ref) {
   return UserState();
 });
