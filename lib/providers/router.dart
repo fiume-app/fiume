@@ -1,6 +1,7 @@
 import 'package:fiume/providers/user.dart';
 import 'package:fiume/screens/home.dart';
 import 'package:fiume/screens/login.dart';
+import 'package:fiume/screens/profile.dart';
 import 'package:fiume/screens/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -29,12 +30,20 @@ class AsyncRouterNotifier extends ChangeNotifier {
   Future<String?> _redirect(BuildContext context, GoRouterState state) async {
     final user = _ref.read(userProvider);
 
-    if (user == null) {
+    if (user?.user == null) {
       if (state.location.startsWith('/login')) return null;
       return '/login';
     }
 
-    if (state.location.startsWith('/login')) return '/';
+    if (state.location.startsWith('/login')) {
+      return '/';
+    }
+
+    if (user?.apiUser == null) {
+      _ref.read(userProvider.notifier).getApiUser();
+
+      return null;
+    }
 
     return null;
   }
@@ -49,6 +58,13 @@ class AsyncRouterNotifier extends ChangeNotifier {
           name: "home",
           path: '/',
           builder: (context, _) => const Home(),
+          routes: [
+            GoRoute(
+              name: "profile",
+              path: "profile",
+              builder: (context, _) => const Profile(),
+            ),
+          ],
         ),
         GoRoute(
           name: "login",
