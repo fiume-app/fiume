@@ -1,6 +1,9 @@
+import 'package:fiume/providers/address.dart';
+import 'package:fiume/providers/cart_meta_data.dart';
 import 'package:fiume/providers/user.dart';
 import 'package:fiume/screens/home.dart';
 import 'package:fiume/screens/login.dart';
+import 'package:fiume/screens/product.dart';
 import 'package:fiume/screens/profile.dart';
 import 'package:fiume/screens/signup.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +44,7 @@ class AsyncRouterNotifier extends ChangeNotifier {
 
     if (user?.apiUser == null) {
       _ref.read(userProvider.notifier).getApiUser();
+      _ref.read(addressProvider.notifier).fetchAddresses();
 
       return null;
     }
@@ -63,6 +67,13 @@ class AsyncRouterNotifier extends ChangeNotifier {
               name: "profile",
               path: "profile",
               builder: (context, _) => const Profile(),
+            ),
+            GoRoute(
+              name: "product",
+              path: "product/:product_id/:pattern_id",
+              builder: (context, state) {
+                return Product(productId: state.params['product_id'] ?? '', patternId: state.params['pattern_id'] ?? '');
+              }
             ),
           ],
         ),
