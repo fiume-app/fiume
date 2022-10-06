@@ -16,16 +16,15 @@ class App extends ConsumerWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent),
         canvasColor: ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent).background,
-        appBarTheme: const AppBarTheme(
+        appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             systemNavigationBarColor: Colors.black,
             statusBarIconBrightness: Brightness.dark,
             systemNavigationBarIconBrightness: Brightness.dark,
           ),
-          shadowColor: Colors.lightBlueAccent,
-          surfaceTintColor: Colors.lightBlueAccent,
-          elevation: 1,
+          surfaceTintColor: Theme.of(context).colorScheme.surface,
+          elevation: 0,
         ),
       ),
       routeInformationParser: router.routeInformationParser,
