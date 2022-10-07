@@ -45,9 +45,9 @@ class ProductsState extends StateNotifier<GetProductsResponse> {
   }
 
   Future<ProductExtended> getProductFuture(String productId, String patternId) async {
-    ProductExtended? product = state.data.firstWhere((element) => element.product.id == productId && element.pattern.id == patternId);
+    //ProductExtended? product = state.data.firstWhere((element) => element.product.id == productId && element.pattern.id == patternId);
 
-    if (product.runtimeType == Null) {
+    //if (product.runtimeType == Null) {
       try {
         FetchProductRet ret = await fetchProduct(FetchProductParams(
           productId: productId,
@@ -58,9 +58,9 @@ class ProductsState extends StateNotifier<GetProductsResponse> {
       } catch (e) {
         rethrow;
       }
-    } else {
-      return Future.delayed(Duration(milliseconds: 200), () => product);
-    }
+    //} else {
+    //  return Future.delayed(Duration(milliseconds: 200), () => product);
+    //}
   }
 }
 
