@@ -51,23 +51,25 @@ class _SwitchPatternV1State extends ConsumerState<SwitchPatternV1> {
             child: CircularProgressIndicator(),
           ),
         ),
-        error: (err, stack) => Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text((err as ApiErrorV1).msg, style: Theme.of(context).textTheme.titleMedium),
-              Text('ERR_CODE: ${(err).code}', style: Theme.of(context).textTheme.overline),
-              const Padding(padding: EdgeInsets.all(5)),
-              ElevatedButton(
-                child: const Text('Retry'),
-                onPressed: () {
-                  ref.refresh(patternsFutureProvider(widget.productId));
-                },
-              )
-            ],
-          ),
-        ),
+        error: (err, stack) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text((err as ApiErrorV1).msg, style: Theme.of(context).textTheme.titleMedium),
+                Text('ERR_CODE: ${(err).code}', style: Theme.of(context).textTheme.overline),
+                const Padding(padding: EdgeInsets.all(5)),
+                ElevatedButton(
+                  child: const Text('Retry'),
+                  onPressed: () {
+                    ref.refresh(patternsFutureProvider(widget.productId));
+                  },
+                )
+              ],
+            ),
+          );
+        },
         data: (resp) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,7 +138,16 @@ class _SwitchPatternV1State extends ConsumerState<SwitchPatternV1> {
                                     }
 
                                     if (match) {
-                                      widget.cb(pattern);
+                                      if (pattern.inventoryCount == 0) {
+                                        showDialog(context: context, builder: (context) => AlertDialog(
+                                          title: Text('Out Of Stock'),
+                                          actions: [
+                                            ElevatedButton(onPressed: () {Navigator.pop(context);}, child: const Text('Ok'))
+                                          ],
+                                        ));
+                                      } else {
+                                        widget.cb(pattern);
+                                      }
                                     }
                                   });
                                 },
@@ -224,7 +235,16 @@ class _SwitchPatternV1State extends ConsumerState<SwitchPatternV1> {
                                 }
 
                                 if (match) {
-                                  widget.cb(pattern);
+                                  if (pattern.inventoryCount == 0) {
+                                    showDialog(context: context, builder: (context) => AlertDialog(
+                                      title: Text('Out Of Stock'),
+                                      actions: [
+                                        ElevatedButton(onPressed: () {Navigator.pop(context);}, child: const Text('Ok'))
+                                      ],
+                                    ));
+                                  } else {
+                                    widget.cb(pattern);
+                                  }
                                 }
                               });
                             },
