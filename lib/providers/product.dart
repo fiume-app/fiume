@@ -62,6 +62,12 @@ class ProductNotifier extends StateNotifier<AsyncValue<ProductState?>> {
       ));
     }
   }
+
+  setBagContains(bool val) {
+    state = AsyncValue.data(ProductState(
+      product: ProductExtended(product: state.value!.product.product, pattern: state.value!.product.pattern, inventoryCount: state.value!.product.inventoryCount, bagContains: val),
+    ));
+  }
 }
 
 final productProvider = StateNotifierProvider.family<ProductNotifier, AsyncValue<ProductState?>, productFutureParams>((ref, d) {
