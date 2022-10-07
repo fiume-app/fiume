@@ -202,7 +202,7 @@ class PatternAlt{
       updatedAt: DateTime.parse(json['updatedAt']),
       details: (json['details'] as List).map((e) => KeyValStruct.fromJSON(e)).toList(),
       images: (json['images'] as List).map((e) => PatternImage.fromJSON(e)).toList(),
-      inventoryCount: json['inventory_count'],
+      inventoryCount: json['inventory_count'] ?? 0,
     );
   }
 }
