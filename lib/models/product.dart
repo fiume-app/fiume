@@ -90,11 +90,13 @@ class ProductExtended {
   final Product product;
   final Pattern pattern;
   final int inventoryCount;
+  final bool bagContains;
 
   ProductExtended({
     required this.product,
     required this.pattern,
     required this.inventoryCount,
+    required this.bagContains,
   });
 
   factory ProductExtended.fromJSON(Map<String, dynamic> json) {
@@ -102,6 +104,7 @@ class ProductExtended {
       product: Product.fromJSON(json['product']),
       pattern: Pattern.fromJSON(json['pattern']),
       inventoryCount: json['inventory_count'],
+      bagContains: json['bag_contains'],
     );
   }
 }
