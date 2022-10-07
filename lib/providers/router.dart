@@ -1,8 +1,10 @@
 import 'package:fiume/providers/address.dart';
-import 'package:fiume/providers/cart_meta_data.dart';
 import 'package:fiume/providers/user.dart';
+import 'package:fiume/screens/bag.dart';
 import 'package:fiume/screens/home.dart';
 import 'package:fiume/screens/login.dart';
+import 'package:fiume/screens/order_confirmation.dart';
+import 'package:fiume/screens/orders.dart';
 import 'package:fiume/screens/product.dart';
 import 'package:fiume/screens/profile.dart';
 import 'package:fiume/screens/signup.dart';
@@ -74,6 +76,21 @@ class AsyncRouterNotifier extends ChangeNotifier {
               builder: (context, state) {
                 return Product(productId: state.params['product_id'] ?? '', patternId: state.params['pattern_id'] ?? '');
               }
+            ),
+            GoRoute(
+              name: "bag",
+              path: "bag",
+              builder: (context, _) => const Bag(),
+            ),
+            GoRoute(
+              name: "order_conf",
+              path: "order_conf",
+              builder: (context, _) => const OrderConfirmation(),
+            ),
+            GoRoute(
+              name: "orders",
+              path: "orders",
+              builder: (context, _) => const Orders(),
             ),
           ],
         ),
