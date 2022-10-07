@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiume/models/bag.dart';
 import 'package:fiume/models/error.dart';
+import 'package:fiume/models/order.dart';
 import 'package:fiume/models/pattern.dart';
 import 'package:fiume/models/product.dart';
 import 'package:http/http.dart';
@@ -108,3 +110,210 @@ Future<FetchProductRet> fetchProduct(FetchProductParams d) async {
     error: errorObj,
   );
 }
+
+Future<PostBagRet> postBag(PostBagParams d) async {
+  var idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+
+  final response = await post(
+    Uri.parse('$_url/bags'),
+    body: jsonEncode({
+      'product_id': d.productId,
+      'pattern_id': d.patternId,
+      'address_id': d.addressId,
+      'qty': d.qty,
+    }),
+    headers: {
+      'Authorization': idToken!,
+      'Content-Type': 'application/json',
+    }
+  );
+
+  if (response.statusCode == 200) {
+    return PostBagRet(
+      response: response.statusCode,
+    );
+  }
+
+  ApiErrorV1 errorObj;
+
+  try {
+    errorObj = ApiErrorV1.fromJSON(jsonDecode(response.body));
+  } catch (e) {
+    errorObj = ApiErrorV1(
+      code: 'UNKNOWN_ERROR',
+      msg: 'Something went wrong !',
+      error: '',
+    );
+  }
+
+  return PostBagRet(
+    error: errorObj,
+  );
+}
+
+Future<GetBagRet> getBag() async {
+  var idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+
+  final response = await get(
+    Uri.parse('$_url/bags'),
+    headers: {
+      'Authorization': idToken!,
+    },
+  );
+
+  if (response.statusCode == 200) {
+    Iterable i = jsonDecode(response.body);
+
+    return GetBagRet(
+      response: i.map((e) => Bag.fromJSON(e)).toList(),
+    );
+  }
+
+  ApiErrorV1 errorObj;
+
+  try {
+    errorObj = ApiErrorV1.fromJSON(jsonDecode(response.body));
+  } catch (e) {
+    errorObj = ApiErrorV1(
+      code: 'UNKNOWN_ERROR',
+      msg: 'Something went wrong !',
+      error: '',
+    );
+  }
+
+  return GetBagRet(
+    error: errorObj,
+  );
+}
+
+Future<DeleteBagRet> deleteBag(DeleteBagParams d) async {
+  var idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+
+  final response = await delete(
+    Uri.parse('$_url/bags/${d.bagId}'),
+    headers: {
+      'Authorization': idToken!,
+    },
+  );
+
+  if (response.statusCode == 200) {
+    return DeleteBagRet(
+      response: response.statusCode,
+    );
+  }
+
+  ApiErrorV1 errorObj;
+
+  try {
+    errorObj = ApiErrorV1.fromJSON(jsonDecode(response.body));
+  } catch (e) {
+    errorObj = ApiErrorV1(
+      code: 'UNKNOWN_ERROR',
+      msg: 'Something went wrong !',
+      error: '',
+    );
+  }
+
+  return DeleteBagRet(
+    error: errorObj,
+  );
+}
+
+Future<PatchBagRet> patchBag(PatchBagParams d) async {
+  var idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+
+  final response = await patch(
+    Uri.parse('$_url/bags/${d.bagId}?qty=${d.qtyInc ? 'increment' : 'decrement'}'),
+    headers: {
+      'Authorization': idToken!,
+    },
+  );
+
+  if (response.statusCode == 200) {
+    return PatchBagRet(
+      response: response.statusCode,
+    );
+  }
+
+  ApiErrorV1 errorObj;
+
+  try {
+    errorObj = ApiErrorV1.fromJSON(jsonDecode(response.body));
+  } catch (e) {
+    errorObj = ApiErrorV1(
+      code: 'UNKNOWN_ERROR',
+      msg: 'Something went wrong !',
+      error: '',
+    );
+  }
+
+  return PatchBagRet(
+    error: errorObj,
+  );
+}
+
+Future<PostOrderRet> postOrder() async {
+  var idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+  
+  final response = await post(
+    Uri.parse('$_url/orders'),
+    headers: {
+      'Authorization': idToken!,
+    },
+  );
+
+  if (response.statusCode == 200) {
+    return PostOrderRet(
+      response: response.statusCode,
+    );
+  }
+
+  ApiErrorV1 errorObj;
+
+  try {
+    errorObj = ApiErrorV1.fromJSON(jsonDecode(response.body));
+  } catch (e) {
+    errorObj = ApiErrorV1(
+      code: 'UNKNOWN_ERROR',
+      msg: 'Something went wrong !',
+      error: '',
+    );
+  }
+
+  return PostOrderRet(
+    error: errorObj,
+  );
+}
+
+Future<GetOrdersRet> getOrders(GetOrdersParams d) async {
+  var idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+  
+  final response = await get(
+    Uri.parse('$_url/orders?skip=${d.skip}&limit=${d.limit}'),
+    headers: {
+      'Authorization': idToken!,
+    },
+  );
+
+  if (response.statusCode == 200) {
+    return GetOrdersRet(
+      response: GetOrdersResponse.fromJSON(jsonDecode(response.body)),
+    );
+  }
+
+  ApiErrorV1 errorObj;
+
+  try {
+    errorObj = ApiErrorV1.fromJSON(jsonDecode(response.body));
+  } catch (e) {
+    errorObj = ApiErrorV1(
+      code: 'UNKNOWN_ERROR',
+      msg: 'Something went wrong !',
+      error: '',
+    );
+  }
+
+  return GetOrdersRet(
+    error: errorObj,
+  );
+} 
