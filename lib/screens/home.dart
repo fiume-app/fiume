@@ -40,7 +40,9 @@ class Home extends ConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_bag, size: 30),
-            onPressed: () {},
+            onPressed: () {
+              context.push("/bag");
+            },
           ),
           IconButton(
             icon: const Icon(Icons.account_circle, size: 30),
