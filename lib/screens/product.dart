@@ -49,9 +49,11 @@ class _ProductState extends ConsumerState<Product> {
 
   @override
   Widget build(BuildContext context) {
+    var p = ref.watch(productProvider(productFutureParams(productId: widget.productId, patternId: widget.patternId)));
+
     return Scaffold(
       appBar: AppBar(),
-      body: ref.watch(productProvider(productFutureParams(productId: widget.productId, patternId: widget.patternId))).when(
+      body: p.when(
         loading: () => const Center(
           child: CircularProgressIndicator(),
         ),
@@ -100,7 +102,7 @@ class _ProductState extends ConsumerState<Product> {
                               child: FittedBox(
                                 fit: BoxFit.contain,
                                 child: Image.network(
-                                    'http://127.0.0.1:3003/v1/public/${e
+                                    'https://fiume-product-photos.s3.ap-south-1.amazonaws.com/${e
                                         .filename}'),
                               ),
                             ),
@@ -273,7 +275,7 @@ class _ProductState extends ConsumerState<Product> {
                       Padding(padding: EdgeInsets.all(10)),
                       DropdownButton(
                         value: _qty,
-                        items: List.generate(5, (index) => index + 1)
+                        items: List.generate(product.product.inventoryCount, (index) => index + 1)
                             .map((e) =>
                             DropdownMenuItem(
                               value: e,
@@ -296,12 +298,17 @@ class _ProductState extends ConsumerState<Product> {
                             .colorScheme
                             .inversePrimary,
                       ),
-                      Spacer(),
+                      const Spacer(),
                       ElevatedButton.icon(
                         onPressed: product.product.bagContains ? () {
                           ref.read(bagProvider.notifier).fetchBagData();
                           context.push("/bag");
                         } : () async {
+                          if (ref.watch(addressProvider).isEmpty) {
+                            showDialog(context: context, builder: (context) => const ErrorDialogV1(errorString: 'Add Address To Continue'));
+                            return;
+                          }
+
                           PostBagRet ret = await postBag(PostBagParams(
                             productId: product.product.product.id,
                             patternId: product.product.pattern.id,
@@ -315,8 +322,8 @@ class _ProductState extends ConsumerState<Product> {
 
                           ref.read(productProvider(productFutureParams(productId: widget.productId, patternId: widget.patternId)).notifier).setBagContains(true);
                         },
-                        label: product.product.bagContains ? Text('Go To Bag') : Text('Add To Bag'),
-                        icon: Icon(Icons.shopping_bag),
+                        label: product.product.bagContains ? const Text('Go To Bag') : const Text('Add To Bag'),
+                        icon: const Icon(Icons.shopping_bag),
                       ),
                     ],
                   ),

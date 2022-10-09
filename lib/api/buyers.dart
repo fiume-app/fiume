@@ -6,7 +6,7 @@ import 'package:fiume/models/buyer.dart';
 import 'package:fiume/models/error.dart';
 import 'package:http/http.dart';
 
-const String _url = 'http://127.0.0.1:3001/v1';
+const String _url = 'https://1cbsbupatd.execute-api.ap-south-1.amazonaws.com/dev/v1';
 
 Future<GetOrPostBuyersRet> getOrPostBuyers() async {
   var idToken = await FirebaseAuth.instance.currentUser?.getIdToken();

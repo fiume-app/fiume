@@ -13,11 +13,13 @@ class Bag extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var b = ref.watch(bagProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Bag'),
       ),
-      body: ref.watch(bagProvider).when(
+      body: b.when(
         loading: () => const Center(
           child: CircularProgressIndicator(),
         ),
@@ -40,7 +42,7 @@ class Bag extends ConsumerWidget {
         ),
         data: (state) => Stack(
           children: [
-            RefreshIndicator(
+            state.bag.isEmpty ? const Center(child: Text('! No Items In Bag')) : RefreshIndicator(
               child: ListView(
                 padding: const EdgeInsets.only(bottom: 120),
                 children: state.bag.map((e) => Padding(
@@ -60,7 +62,7 @@ class Bag extends ConsumerWidget {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(10),
-                              child: Image.network('http://127.0.0.1:3003/v1/public/${e.pattern.images[0].sizes.small.filename}'),
+                              child: Image.network('https://fiume-product-photos.s3.ap-south-1.amazonaws.com/${e.pattern.images[0].sizes.small.filename}'),
                             ),
                           ),
                           Flexible(
@@ -199,7 +201,7 @@ class Bag extends ConsumerWidget {
                       ),
                       Spacer(),
                       ElevatedButton.icon(
-                        onPressed: () {
+                        onPressed: state.bag.isEmpty ? null : () {
                           showDialog(context: context, builder: (c) => AlertDialog(
                             title: Text('Are you Sure?'),
                             content: Text('This is an irreversible process !'),

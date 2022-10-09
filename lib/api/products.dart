@@ -8,7 +8,7 @@ import 'package:fiume/models/pattern.dart';
 import 'package:fiume/models/product.dart';
 import 'package:http/http.dart';
 
-const String _url = 'http://127.0.0.1:3002/v1';
+const String _url = 'https://2n9naz5qpi.execute-api.ap-south-1.amazonaws.com/dev/v1';
 
 Future<GetProductsRet> getProducts(GetProductsParams d) async {
   var idToken = await FirebaseAuth.instance.currentUser?.getIdToken();

@@ -164,7 +164,7 @@ class _SwitchPatternV1State extends ConsumerState<SwitchPatternV1> {
                                     padding: const EdgeInsets.all(10),
                                     child: FittedBox(
                                       fit: BoxFit.contain,
-                                      child: Image.network('http://127.0.0.1:3003/v1/public/${i.images[0].sizes.small.filename}'),
+                                      child: Image.network('https://fiume-product-photos.s3.ap-south-1.amazonaws.com/${i.images[0].sizes.small.filename}'),
                                     ),
                                   ),
                                 ),

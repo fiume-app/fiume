@@ -71,7 +71,7 @@ class Orders extends ConsumerWidget {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
-                                  child: Image.network('http://127.0.0.1:3003/v1/public/${e.pattern.images[0].sizes.small.filename}'),
+                                  child: Image.network('https://fiume-product-photos.s3.ap-south-1.amazonaws.com/${e.pattern.images[0].sizes.small.filename}'),
                                 ),
                               ),
                               Flexible(

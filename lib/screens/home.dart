@@ -98,7 +98,7 @@ class Home extends ConsumerWidget {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(10),
-                            child: Image.network('http://127.0.0.1:3003/v1/public/${products.data[index].pattern.images[0].sizes.small.filename}'),
+                            child: Image.network('https://fiume-product-photos.s3.ap-south-1.amazonaws.com/${products.data[index].pattern.images[0].sizes.small.filename}'),
                           ),
                         ),
                         Flexible(

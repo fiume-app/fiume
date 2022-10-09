@@ -42,6 +42,8 @@ class UserState extends StateNotifier<ModUser?> {
 
       await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
 
+      await FirebaseAuth.instance.currentUser?.getIdToken(true);
+
       var ret = await getOrPostBuyers();
 
       if (ret.error != null) {
