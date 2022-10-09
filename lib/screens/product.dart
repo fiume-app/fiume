@@ -2,12 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fiume/api/products.dart';
 import 'package:fiume/models/bag.dart';
 import 'package:fiume/models/error.dart';
-import 'package:fiume/models/product.dart';
 import 'package:fiume/providers/address.dart';
 import 'package:fiume/providers/bag.dart';
-import 'package:fiume/providers/cart_meta_data.dart';
 import 'package:fiume/providers/product.dart';
-import 'package:fiume/providers/products.dart';
 import 'package:fiume/widgets/address_dialog_v1.dart';
 import 'package:fiume/widgets/error_dialog_v1.dart';
 import 'package:fiume/widgets/switch_address_dialog_v1.dart';
@@ -76,11 +73,11 @@ class _ProductState extends ConsumerState<Product> {
         ),
         data: (product) => product == null ? Container() : Stack(
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               height: double.infinity,
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(bottom: 120),
+                padding: const EdgeInsets.only(bottom: 120),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -88,7 +85,7 @@ class _ProductState extends ConsumerState<Product> {
                       carouselController: _controller,
                       items: product.product.pattern.images.map((e) =>
                           Padding(
-                            padding: EdgeInsets.all(0),
+                            padding: const EdgeInsets.all(0),
                             child: Container(
                               clipBehavior: Clip.hardEdge,
                               height: double.infinity,
@@ -118,7 +115,7 @@ class _ProductState extends ConsumerState<Product> {
                           }
                       ),
                     ),
-                    Padding(padding: EdgeInsets.all(5)),
+                    const Padding(padding: EdgeInsets.all(5)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: product.product.pattern.images.asMap().entries.map((entry) {
@@ -127,7 +124,7 @@ class _ProductState extends ConsumerState<Product> {
                           child: Container(
                             width: 10.0,
                             height: 10.0,
-                            margin: EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
+                            margin: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: (Theme.of(context).brightness == Brightness.dark
@@ -139,19 +136,19 @@ class _ProductState extends ConsumerState<Product> {
                       }).toList(),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(product.product.product.name ?? '', style: Theme
+                          Text(product.product.product.name, style: Theme
                               .of(context)
                               .textTheme
                               .headlineMedium),
-                          Text(product.product.pattern.name ?? '', style: Theme
+                          Text(product.product.pattern.name, style: Theme
                               .of(context)
                               .textTheme
                               .labelMedium),
-                          Padding(padding: EdgeInsets.all(10)),
+                          const Padding(padding: EdgeInsets.all(10)),
                           SwitchPatternV1(
                             productId: product.product.product.id,
                             details: product.product.pattern.details,
@@ -160,7 +157,7 @@ class _ProductState extends ConsumerState<Product> {
                               ref.read(productProvider(productFutureParams(productId: widget.productId, patternId: widget.patternId)).notifier).setPatternId(pattern.id);
                             },
                           ),
-                          Padding(padding: EdgeInsets.all(10)),
+                          const Padding(padding: EdgeInsets.all(10)),
                           Text('MRP: ₹${product.product.pattern.price}',
                               style: Theme
                                   .of(context)
@@ -170,8 +167,8 @@ class _ProductState extends ConsumerState<Product> {
                               .of(context)
                               .textTheme
                               .caption),
-                          Padding(padding: EdgeInsets.all(10)),
-                          Text('Free delivery'),
+                          const Padding(padding: EdgeInsets.all(10)),
+                          const Text('Free delivery'),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment
                                 .start,
@@ -227,12 +224,12 @@ class _ProductState extends ConsumerState<Product> {
                               ),
                             ],
                           ),
-                          Padding(padding: EdgeInsets.all(10)),
+                          const Padding(padding: EdgeInsets.all(10)),
                           Text('Description', style: Theme
                               .of(context)
                               .textTheme
                               .titleLarge),
-                          Text(product.product.product.description ?? '', style: Theme
+                          Text(product.product.product.description, style: Theme
                               .of(context)
                               .textTheme
                               .bodySmall),
@@ -259,7 +256,7 @@ class _ProductState extends ConsumerState<Product> {
                       .primary,
                 ),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -272,7 +269,7 @@ class _ProductState extends ConsumerState<Product> {
                           .of(context)
                           .colorScheme
                           .inversePrimary))),
-                      Padding(padding: EdgeInsets.all(10)),
+                      const Padding(padding: EdgeInsets.all(10)),
                       DropdownButton(
                         value: _qty,
                         items: List.generate(product.product.inventoryCount, (index) => index + 1)

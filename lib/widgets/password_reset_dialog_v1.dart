@@ -31,14 +31,14 @@ class _PasswordResetDialogV1State extends ConsumerState<PasswordResetDialogV1> {
         key: _formKey,
         child: AlertDialog(
           title: Row(
-            children: [
+            children: const [
               Text('Reset Pass'),
               Spacer(),
               CloseButton(),
             ],
           ),
           content: Padding(
-            padding: EdgeInsets.all(0),
+            padding: const EdgeInsets.all(0),
             child: Wrap(
               children: [
                 TextFormField(

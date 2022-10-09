@@ -30,13 +30,13 @@ class _AddressDialogV1State extends ConsumerState<AddressDialogV1> {
       key: _formKey,
       child: AlertDialog(
         title: Row(
-          children: [
+          children: const [
             Text('Add Address'),
             Spacer(),
             CloseButton(),
           ],
         ),
-        content: Container(
+        content: SizedBox(
           width: double.maxFinite,
           child: SingleChildScrollView(
             child: Wrap(
@@ -66,7 +66,7 @@ class _AddressDialogV1State extends ConsumerState<AddressDialogV1> {
                   },
                   maxLines: 2,
                 ),
-                Padding(padding: EdgeInsets.all(10)),
+                const Padding(padding: EdgeInsets.all(10)),
                 TextFormField(
                   onEditingComplete: () {
                     FocusScope.of(context).nextFocus();
@@ -92,7 +92,7 @@ class _AddressDialogV1State extends ConsumerState<AddressDialogV1> {
                   },
                   maxLines: 2,
                 ),
-                Padding(padding: EdgeInsets.all(10)),
+                const Padding(padding: EdgeInsets.all(10)),
                 TextFormField(
                   onEditingComplete: () {
                     FocusScope.of(context).nextFocus();
@@ -117,7 +117,7 @@ class _AddressDialogV1State extends ConsumerState<AddressDialogV1> {
                     return null;
                   },
                 ),
-                Padding(padding: EdgeInsets.all(10)),
+                const Padding(padding: EdgeInsets.all(10)),
                 TextFormField(
                   onEditingComplete: () {
                     FocusScope.of(context).nextFocus();
@@ -142,7 +142,7 @@ class _AddressDialogV1State extends ConsumerState<AddressDialogV1> {
                     return null;
                   },
                 ),
-                Padding(padding: EdgeInsets.all(10)),
+                const Padding(padding: EdgeInsets.all(10)),
                 TextFormField(
                   onEditingComplete: () {
                     FocusScope.of(context).nextFocus();

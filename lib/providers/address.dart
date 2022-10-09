@@ -1,6 +1,5 @@
 import 'package:fiume/api/buyers.dart';
 import 'package:fiume/models/address.dart';
-import 'package:fiume/providers/cart_meta_data.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AddressState extends StateNotifier<List<Address>> {

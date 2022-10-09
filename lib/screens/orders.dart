@@ -1,5 +1,4 @@
 import 'package:fiume/models/error.dart';
-import 'package:fiume/models/order.dart';
 import 'package:fiume/providers/orders.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -48,13 +47,13 @@ class Orders extends ConsumerWidget {
             itemBuilder: (context, index) {
               if (index < state.orderRes.data.length) {
                 return Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Column(
                     children: [
-                      Divider(),
+                      const Divider(),
                       ListTile(
-                        title: Text('Order'),
-                        subtitle: Text('${state.orderRes.data[index].id}'),
+                        title: const Text('Order'),
+                        subtitle: Text(state.orderRes.data[index].id),
                       ),
                       Column(
                         children: state.orderRes.data[index].inventory.map((e) {
@@ -109,9 +108,9 @@ class Orders extends ConsumerWidget {
                       ),
                       ListTile(
                         title: Text('Status: ${state.orderRes.data[index].status}'),
-                        subtitle: Text('Ordered On: ' + DateFormat.yMMMEd().format(state.orderRes.data[index].createdAt)),
+                        subtitle: Text('Ordered On: ${DateFormat.yMMMEd().format(state.orderRes.data[index].createdAt)}'),
                       ),
-                      Divider(),
+                      const Divider(),
                     ],
                   ),
                 );

@@ -17,7 +17,7 @@ class Bag extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bag'),
+        title: const Text('Bag'),
       ),
       body: b.when(
         loading: () => const Center(
@@ -46,7 +46,7 @@ class Bag extends ConsumerWidget {
               child: ListView(
                 padding: const EdgeInsets.only(bottom: 120),
                 children: state.bag.map((e) => Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Column(
                     children: [
                       Row(
@@ -130,7 +130,7 @@ class Bag extends ConsumerWidget {
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Text(e.qty.toString(), style: Theme.of(context).textTheme.titleLarge),
                           ),
                           Row(
@@ -175,7 +175,7 @@ class Bag extends ConsumerWidget {
                       .primary,
                 ),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -199,20 +199,20 @@ class Bag extends ConsumerWidget {
                             .colorScheme
                             .inversePrimary))
                       ),
-                      Spacer(),
+                      const Spacer(),
                       ElevatedButton.icon(
                         onPressed: state.bag.isEmpty ? null : () {
                           showDialog(context: context, builder: (c) => AlertDialog(
-                            title: Text('Are you Sure?'),
-                            content: Text('This is an irreversible process !'),
+                            title: const Text('Are you Sure?'),
+                            content: const Text('This is an irreversible process !'),
                             actions: [
                               TextButton(onPressed: () {
                                 Navigator.pop(c);
-                              }, child: Text('No')),
+                              }, child: const Text('No')),
                               ElevatedButton(onPressed: () {
                                 Navigator.pop(c);
                                 context.push("/order_conf");
-                              }, child: Text('Yes')),
+                              }, child: const Text('Yes')),
                             ],
                           ));
                         },

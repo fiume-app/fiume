@@ -79,25 +79,25 @@ class _SwitchPatternV1State extends ConsumerState<SwitchPatternV1> {
                 Text(e.headerTitle ?? e.key, style: Theme.of(context).textTheme.titleLarge),
                 const Padding(padding: EdgeInsets.all(2)),
                 e.selectorType == 'image' ?
-                Container(
+                SizedBox(
                   height: 140,
                   child: Builder(
                     builder: (context) {
                       List<PatternAlt> l = [];
 
-                      resp.forEach((i) {
+                      for (var i in resp) {
                         bool insert = true;
 
-                        l.forEach((j) {
+                        for (var j in l) {
                           if (i.details.firstWhere((element) => element.key == e.key).value == j.details.firstWhere((element) => element.key == e.key).value) {
                             insert = false;
                           }
-                        });
+                        }
 
                         if (insert) {
                           l.add(i);
                         }
-                      });
+                      }
 
                       int index = l.indexWhere((element) {
                         return widget.details.firstWhere((v) => v.key == e.key).value == element.details.firstWhere((v) => v.key == e.key).value;
@@ -126,7 +126,7 @@ class _SwitchPatternV1State extends ConsumerState<SwitchPatternV1> {
                                     selection[widget.differentiators.indexWhere((d) => d.key == e.key)] = i.details.firstWhere((element) => element.key == e.key).value;
                                   });
 
-                                  resp.forEach((pattern) {
+                                  for (var pattern in resp) {
                                     bool match = false;
 
                                     for (int i = 0; i < widget.differentiators.length; i++) {
@@ -140,7 +140,7 @@ class _SwitchPatternV1State extends ConsumerState<SwitchPatternV1> {
                                     if (match) {
                                       if (pattern.inventoryCount == 0) {
                                         showDialog(context: context, builder: (context) => AlertDialog(
-                                          title: Text('Out Of Stock'),
+                                          title: const Text('Out Of Stock'),
                                           actions: [
                                             ElevatedButton(onPressed: () {Navigator.pop(context);}, child: const Text('Ok'))
                                           ],
@@ -149,7 +149,7 @@ class _SwitchPatternV1State extends ConsumerState<SwitchPatternV1> {
                                         widget.cb(pattern);
                                       }
                                     }
-                                  });
+                                  }
                                 },
                                 child: Container(
                                   width: 100,
@@ -178,25 +178,25 @@ class _SwitchPatternV1State extends ConsumerState<SwitchPatternV1> {
                   ),
                 )
                     :
-                Container(
+                SizedBox(
                   height: 60,
                   child: Builder(
                     builder: (context) {
                       List<PatternAlt> l = [];
 
-                      resp.forEach((i) {
+                      for (var i in resp) {
                         bool insert = true;
 
-                        l.forEach((j) {
+                        for (var j in l) {
                           if (i.details.firstWhere((element) => element.key == e.key).value == j.details.firstWhere((element) => element.key == e.key).value) {
                             insert = false;
                           }
-                        });
+                        }
 
                         if (insert) {
                           l.add(i);
                         }
-                      });
+                      }
 
                       int index = l.indexWhere((element) {
                         return widget.details.firstWhere((v) => v.key == e.key).value == element.details.firstWhere((v) => v.key == e.key).value;
@@ -223,7 +223,7 @@ class _SwitchPatternV1State extends ConsumerState<SwitchPatternV1> {
                                 selection[widget.differentiators.indexWhere((d) => d.key == e.key)] = i.details.firstWhere((element) => element.key == e.key).value;
                               });
 
-                              resp.forEach((pattern) {
+                              for (var pattern in resp) {
                                 bool match = false;
 
                                 for (int i = 0; i < widget.differentiators.length; i++) {
@@ -237,7 +237,7 @@ class _SwitchPatternV1State extends ConsumerState<SwitchPatternV1> {
                                 if (match) {
                                   if (pattern.inventoryCount == 0) {
                                     showDialog(context: context, builder: (context) => AlertDialog(
-                                      title: Text('Out Of Stock'),
+                                      title: const Text('Out Of Stock'),
                                       actions: [
                                         ElevatedButton(onPressed: () {Navigator.pop(context);}, child: const Text('Ok'))
                                       ],
@@ -246,7 +246,7 @@ class _SwitchPatternV1State extends ConsumerState<SwitchPatternV1> {
                                     widget.cb(pattern);
                                   }
                                 }
-                              });
+                              }
                             },
                             child: Container(
                               height: 50,
@@ -258,7 +258,7 @@ class _SwitchPatternV1State extends ConsumerState<SwitchPatternV1> {
                               ),
                               child: Center(
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(horizontal: 20),
                                   child: Text(i.details.firstWhere((element) => element.key == e.key).value),
                                 ),
                               ),

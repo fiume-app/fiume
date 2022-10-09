@@ -22,176 +22,178 @@ class _SignupState extends ConsumerState<Signup> {
   String _name = '';
   String _email = '';
   String _password = '';
-  String _conpassword = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up'),
+        title: const Text('Sign Up'),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              TextFormField(
-                onEditingComplete: () {
-                  FocusScope.of(context).nextFocus();
-                },
-                onChanged: (v) {
-                  setState(() {
-                    _name = v;
-                  });
-                },
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r"^[A-Za-z]+[\s]?[A-Za-z]*$"))
-                ],
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please Enter Name';
-                  }
-
-                  if (RegExp(r"^[A-Za-z]+[\s]?[A-Za-z]*$").hasMatch(value) == false) {
-                    return 'Please Enter Valid Name';
-                  }
-
-                  return null;
-                },
-              ),
-              Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-              TextFormField(
-                onEditingComplete: () {
-                  FocusScope.of(context).nextFocus();
-                },
-                onChanged: (v) {
-                  setState(() {
-                    _email = v;
-                  });
-                },
-                autocorrect: false,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please Enter Email';
-                  }
-
-                  if (EmailValidator.validate(value) == false) {
-                    return 'Please enter Valid Email';
-                  }
-
-                  return null;
-                },
-              ),
-              Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-              TextFormField(
-                onEditingComplete: () {
-                  FocusScope.of(context).nextFocus();
-                },
-                onChanged: (v) {
-                  setState(() {
-                    _password = v;
-                  });
-                },
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please Enter Password';
-                  }
-
-                  if (value.length < 8) {
-                    return 'Password too weak';
-                  }
-
-                  return null;
-                },
-              ),
-              Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-              TextFormField(
-                onEditingComplete: () {
-                  FocusScope.of(context).nextFocus();
-                },
-                onChanged: (v) {
-                  setState(() {
-                    _conpassword = v;
-                  });
-                },
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration: InputDecoration(
-                  labelText: 'Confirm Password',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please Enter Password';
-                  }
-
-                  if (value != _password) {
-                    return 'Password and confirm password not equal';
-                  }
-
-                  return null;
-                },
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-                child: ButtonWithLoading(
-                  height: 50,
-                  width: double.infinity,
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      OpRet ret = await ref.read(userProvider.notifier).signup(
-                        _email,
-                        _password,
-                        _name,
-                      );
-
-                      if (ret.errorString != null) {
-                        showDialog(
-                            context: context,
-                            builder: (context) => ErrorDialogV1(errorString: ret.errorString!)
-                        );
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  TextFormField(
+                    onEditingComplete: () {
+                      FocusScope.of(context).nextFocus();
+                    },
+                    onChanged: (v) {
+                      setState(() {
+                        _name = v;
+                      });
+                    },
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r"^[A-Za-z]+[\s]?[A-Za-z]*$"))
+                    ],
+                    decoration: InputDecoration(
+                      labelText: 'Name',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter Name';
                       }
-                    }
-                  },
-                  child: const Text('Sign Up'),
-                ),
+
+                      if (RegExp(r"^[A-Za-z]+[\s]?[A-Za-z]*$").hasMatch(value) == false) {
+                        return 'Please Enter Valid Name';
+                      }
+
+                      return null;
+                    },
+                  ),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                  TextFormField(
+                    onEditingComplete: () {
+                      FocusScope.of(context).nextFocus();
+                    },
+                    onChanged: (v) {
+                      setState(() {
+                        _email = v;
+                      });
+                    },
+                    autocorrect: false,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter Email';
+                      }
+
+                      if (EmailValidator.validate(value) == false) {
+                        return 'Please enter Valid Email';
+                      }
+
+                      return null;
+                    },
+                  ),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                  TextFormField(
+                    onEditingComplete: () {
+                      FocusScope.of(context).nextFocus();
+                    },
+                    onChanged: (v) {
+                      setState(() {
+                        _password = v;
+                      });
+                    },
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter Password';
+                      }
+
+                      if (value.length < 8) {
+                        return 'Password too weak';
+                      }
+
+                      return null;
+                    },
+                  ),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                  TextFormField(
+                    onEditingComplete: () {
+                      FocusScope.of(context).nextFocus();
+                    },
+                    onChanged: (v) {
+                      setState(() {
+                      });
+                    },
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    decoration: InputDecoration(
+                      labelText: 'Confirm Password',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter Password';
+                      }
+
+                      if (value != _password) {
+                        return 'Password and confirm password not equal';
+                      }
+
+                      return null;
+                    },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                    child: ButtonWithLoading(
+                      height: 50,
+                      width: double.infinity,
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          OpRet ret = await ref.read(userProvider.notifier).signup(
+                            _email,
+                            _password,
+                            _name,
+                          );
+
+                          if (ret.errorString != null) {
+                            showDialog(
+                                context: context,
+                                builder: (context) => ErrorDialogV1(errorString: ret.errorString!)
+                            );
+                          }
+                        }
+                      },
+                      child: const Text('Sign Up'),
+                    ),
+                  ),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(text: "By Signing Up you agree to our Terms, Conditions and Privacy Policy ", style: Theme.of(context).textTheme.caption),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  children: [
-                    TextSpan(text: "By Signing Up you agree to our Terms, Conditions and Privacy Policy ", style: Theme.of(context).textTheme.caption),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

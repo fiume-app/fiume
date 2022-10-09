@@ -30,7 +30,7 @@ class _SwitchAddressDialogV1State extends ConsumerState<SwitchAddressDialogV1> {
           CloseButton(),
         ],
       ),
-      content: Container(
+      content: SizedBox(
         width: double.maxFinite,
         child: SingleChildScrollView(
           child: Column(
@@ -48,7 +48,7 @@ class _SwitchAddressDialogV1State extends ConsumerState<SwitchAddressDialogV1> {
               ),
               leading: Radio(
                 value: e.id,
-                groupValue: _val.length == 0 ? widget.initVal : _val,
+                groupValue: _val.isEmpty ? widget.initVal : _val,
                 onChanged: (v) {
                   setState(() {
                     _val = v!;

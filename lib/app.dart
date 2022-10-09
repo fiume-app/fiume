@@ -17,7 +17,7 @@ class App extends ConsumerWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent),
         canvasColor: ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent).background,
         appBarTheme: AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle(
+          systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             systemNavigationBarColor: Colors.black,
             statusBarIconBrightness: Brightness.dark,

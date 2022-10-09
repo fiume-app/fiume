@@ -45,7 +45,7 @@ class _ButtonWithLoadingState extends State<ButtonWithLoading> {
           ),
         ),
         crossFadeState: _loading ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
     );
   }
 }
