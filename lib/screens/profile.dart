@@ -1,3 +1,4 @@
+import 'package:fiume/providers/payment_gateway.dart';
 import 'package:fiume/providers/user.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -35,6 +36,15 @@ class Profile extends ConsumerWidget {
                       leading: const Icon(Icons.inventory_2_outlined),
                       onTap: () {
                         context.push("/orders");
+                      },
+                      onLongPress: () {
+                        ref.read(paymentGatewayProvider.notifier).setVal(!ref.watch(paymentGatewayProvider)!);
+                        showDialog(context: context, builder: (context) => AlertDialog(
+                          title: Text('Payment Gateway ${ref.watch(paymentGatewayProvider) ? 'Enabled': 'Disabled' }'),
+                          actions: [
+                            ElevatedButton(onPressed: () {Navigator.pop(context);}, child: Text('Ok'))
+                          ],
+                        ));
                       },
                     ),
                     ListTile(

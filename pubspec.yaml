@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.18.1 <3.0.0'
+  sdk: '3.3.4'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -35,52 +35,50 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.8
 
   # Firebase Libs
-  firebase_core: ^1.23.0
-  firebase_auth: ^3.10.0
+  firebase_core: ^2.31.1
+  firebase_auth: ^4.19.6
 
   # Splash Screen Management Lib
-  flutter_native_splash: ^2.2.9
+  flutter_native_splash: ^2.3.0
 
   # Riverpod Lib for State Management
-  flutter_hooks: ^0.18.0
-  hooks_riverpod: ^2.0.0-dev.9
+  flutter_hooks: ^0.20.5
+  hooks_riverpod: ^2.5.1
 
   # Routing and Navigation Lib
-  go_router: ^5.0.1
+  go_router: ^14.2.1
 
   # Validation Lib
-  email_validator: ^2.1.17
+  email_validator: ^3.0.0
 
   # Svg Loading Lib
-  flutter_svg: ^1.1.5
+  flutter_svg: ^2.0.10+1
 
   # Networking Lib
-  dio: ^4.0.6
-  http: ^0.13.5
+  dio: ^5.5.0+1
+  http: ^1.2.2
 
   # UI Lib
-  carousel_slider: ^4.1.1
-  freezed_annotation: ^2.1.0
+  carousel_slider: ^4.2.1
+  freezed_annotation: ^2.4.4
 
   # Util lib
-  intl: ^0.17.0
+  intl: ^0.19.0
+  razorpay_flutter: ^1.3.7
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
-  build_runner: ^2.2.1
-  freezed: ^2.1.1
-  flutter_launcher_icons: ^0.10.0
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.0
+  freezed: ^2.5.0
+  flutter_launcher_icons: ^0.13.1
 
 flutter_icons:
   android: true

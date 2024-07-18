@@ -36,11 +36,11 @@ class AsyncRouterNotifier extends ChangeNotifier {
     final user = _ref.read(userProvider);
 
     if (user?.user == null) {
-      if (state.location.startsWith('/login')) return null;
+      if (state.matchedLocation.startsWith('/login')) return null;
       return '/login';
     }
 
-    if (state.location.startsWith('/login')) {
+    if (state.matchedLocation.startsWith('/login')) {
       return '/';
     }
 
@@ -74,7 +74,7 @@ class AsyncRouterNotifier extends ChangeNotifier {
               name: "product",
               path: "product/:product_id/:pattern_id",
               builder: (context, state) {
-                return Product(productId: state.params['product_id'] ?? '', patternId: state.params['pattern_id'] ?? '');
+                return Product(productId: state.pathParameters['product_id'] ?? '', patternId: state.pathParameters['pattern_id'] ?? '');
               }
             ),
             GoRoute(

@@ -252,19 +252,35 @@ Future<PatchBagRet> patchBag(PatchBagParams d) async {
   );
 }
 
-Future<PostOrderRet> postOrder() async {
+Future<PostOrderRet> postOrder(PostOrderParams d) async {
   var idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
   
   final response = await post(
     Uri.parse('$_url/orders'),
+    body: jsonEncode({
+      'pg': d.pg,
+    }),
     headers: {
       'Authorization': idToken!,
+      'Content-Type': 'application/json',
     },
   );
 
   if (response.statusCode == 200) {
+    var json = jsonDecode(response.body);
+
     return PostOrderRet(
-      response: response.statusCode,
+      response: Order(
+        id: json['_id'],
+        buyerId: json['buyer_id'],
+        status: json['status'],
+        paymentGateway: json['payment_gateway'],
+        paymentStatus: json['payment_status'],
+        gatewayDetails: GatewayDetails.fromJSON(json['gateway_details']),
+        inventory: [],
+        createdAt: DateTime.parse(json['createdAt']),
+        updatedAt: DateTime.parse(json['updatedAt']),
+      ),
     );
   }
 

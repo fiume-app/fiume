@@ -98,8 +98,16 @@ class Order {
   }
 }
 
+class PostOrderParams {
+  final bool pg;
+
+  PostOrderParams({
+    required this.pg,
+  });
+}
+
 class PostOrderRet {
-  final int? response;
+  final Order? response;
   final ApiErrorV1? error;
 
   PostOrderRet({

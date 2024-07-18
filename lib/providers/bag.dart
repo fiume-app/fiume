@@ -21,7 +21,7 @@ class BagNotifier extends StateNotifier<AsyncValue<BagState>> {
     GetBagRet ret = await getBag();
 
     if (ret.error != null) {
-      state = AsyncValue.error(ret.error!);
+      state = AsyncValue.error(ret.error!, StackTrace.current);
       return;
     }
 

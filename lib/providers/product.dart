@@ -31,13 +31,13 @@ class ProductNotifier extends StateNotifier<AsyncValue<ProductState?>> {
         product: product,
       ));
     } on GetProductsRet catch (e) {
-      state = AsyncValue.error(e);
+      state = AsyncValue.error(e, StackTrace.current);
     } catch (e) {
       state = AsyncValue.error(ApiErrorV1(
         code: 'UNKNOWN_ERROR',
         msg: 'An Unknown Error Occurred',
         error: e.toString(),
-      ));
+      ), StackTrace.current);
     }
   }
 
@@ -53,13 +53,13 @@ class ProductNotifier extends StateNotifier<AsyncValue<ProductState?>> {
         product: product,
       ));
     } on GetProductsRet catch (e) {
-      state = AsyncValue.error(e);
+      state = AsyncValue.error(e, StackTrace.current);
     } catch (e) {
       state = AsyncValue.error(ApiErrorV1(
         code: 'UNKNOWN_ERROR',
         msg: 'An Unknown Error Occurred',
         error: e.toString(),
-      ));
+      ), StackTrace.current);
     }
   }
 

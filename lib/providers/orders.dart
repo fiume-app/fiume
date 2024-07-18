@@ -21,7 +21,7 @@ class OrdersNotifier extends StateNotifier<AsyncValue<OrdersState>> {
     GetOrdersRet ret = await getOrders(GetOrdersParams(skip: 0, limit: 10));
 
     if (ret.error != null) {
-      state = AsyncValue.error(ret.error!);
+      state = AsyncValue.error(ret.error!, StackTrace.current);
       return;
     }
 
