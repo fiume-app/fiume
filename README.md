@@ -1,16 +1,15 @@
-# fiume
+# Fiume
 
-A new Flutter project.
+### App built with Flutter
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="sc/login.png" width="200" />
+<img src="sc/signup.png" width="200" />
+<img src="sc/index.png" width="200" />
+<img src="sc/profile.png" width="200" />
+<img src="sc/product1.png" width="200" />
+<img src="sc/product2.png" width="200" />
+<img src="sc/address1.png" width="200" />
+<img src="sc/address2.png" width="200" />
+<img src="sc/product3.png" width="200" />
+<img src="sc/success.png" width="200" />
+<img src="sc/order.png" width="200" />
